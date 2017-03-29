@@ -1,0 +1,41 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    {% if sheds %}
+        <ul class="shed-list-container">
+            {% for shed in sheds %}
+                <li class="shed-item-container">                    
+                    
+                    <div class="inline">                    
+                        <p><label class="field-name">{{ shed }}</label></p>
+                    </div>
+                    <div class="inline">     
+                        <p><label class="field-name">Open from:</label> {{ shed.open_from }} </p>
+                        <p><label class="field-name">Open To:</label> {{ shed.open_to }} </p>
+                    </div>
+                    <div class="inline">     
+                        <p>
+                            <label class="field-name">Coordinator:</label>
+                            <a href="{% url 'user.details' shed.coordinator.id %}" title="{{ shed.coordinator }}">
+                                {{ shed.coordinator.email }}
+                            </a>
+                        </p>
+                    </div>
+                    
+                    <div class="inline float-right">                    
+                        {% if shed.coordinator_id == request.user.id %}
+                            <form action="{% url 'shed.deregister.post' shed.id %}" method="post" class="inline">{% csrf_token %}
+                                <input type="submit" value="Deregister" />
+                            </form>
+                            <a class="button" href="{% url 'shed.edit.get' shed.id %}">Edit</a>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No sheds in your area. Create one <a href="{% url 'shed.create.get' %}">here</a>!</p>
+    {% endif %}
+
+{% endblock %}

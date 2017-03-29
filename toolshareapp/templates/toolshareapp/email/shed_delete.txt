@@ -1,0 +1,4 @@
+ToolShare: Community tool sharing network
+Hello! {{ tool.owner }}.
+The shed {{ tool.shed }} has been deregistered. Your tools' location has been changed to Home.=======
+

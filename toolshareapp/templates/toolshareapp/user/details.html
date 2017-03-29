@@ -1,0 +1,85 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+<div class="create-form">  
+	<h2>{{ user.name }}'s Profile</h2>    
+    
+    <div class="profile-picture float-left">
+        <img src="{{ user.picture.url }}" />
+    </div>
+    
+    <table>
+        <tbody>
+            <tr>
+                <th>
+                    <label for="id_email">Email:</label>
+                </th>
+                <td>
+			<span id="id_email"><a href="mailto:{{ user.email }}" target="_top">
+                            {{ user.email}}</a></span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_name">Name:</label>
+                </th>
+                <td>
+                    <span id="id_name">{{ user.name }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_lastname">Lastname:</label>
+                </th>
+                <td>
+                    <span id="id_lastname">{{ user.lastname }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_street_name">Address:</label>
+                </th>
+                <td>
+                    <span id="id_street_name"><a class="googleMapPopUp" rel="nofollow" href="https://maps.google.com.au/maps?q={{ user.house_number }} {{ user.street_name }} {{ user.zip_code }}" target="_blank">{{ user.house_number }} {{ user.street_name }}</a>​</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_zip_code">Zip code:</label>
+                </th>
+                <td>
+                    <span id="id_zip_code">{{ user.zip_code }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_phone_number">Phone number:</label>
+                </th>
+                <td>
+                    <span id="id_phone_number">{{ user.phone_number }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_preferred_pickup_location">Preferred pickup location:</label>
+                </th>
+                <td>
+                    <span id="id_preferred_pickup_location">{{ user.preferred_pickup_location }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_preferred_contact_method">Preferred contact method:</label>
+                </th>
+                <td>
+                    <span id="id_preferred_contact_method">{{ user.preferred_contact_method }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+        
+</div>
+
+
+
+{% endblock %}

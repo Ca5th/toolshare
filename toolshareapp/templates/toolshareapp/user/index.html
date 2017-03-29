@@ -1,0 +1,37 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+    
+    {% if show_search %}
+    <form action="{% url 'user.search.post' %}" method="post">{% csrf_token %}
+        <div class="search-form">
+            <input id="id_search_term" name="search_term" type="text" value="{% if search_term %} {{ search_term }} {% endif %}">
+            <input type="submit" value="Search" />
+        </div>
+    </form>    
+    {% endif %}
+    
+    {% if users %}
+        <ul class="tool-list-container">
+            {% for user in users %}
+                <li class="tool-item-container">                       
+                    <div class="picture-container float-left">                 
+                        <img src="{{ user.picture.url }}" />
+                    </div>
+                    
+                    <div>
+                        <div class="inline float-left">
+                            <a href="{% url 'user.details' user.id %}" title="{{ user.email}}">
+                            <b>{{ user.name }} {{ user.lastname }}</b>
+                                </a>
+                            <p><a href="mailto:{{ user.email }}" target="_top">
+                            {{ user.email}}</a></p>                  
+                    </div>                    
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No users to show.</p>
+    {% endif %}
+
+{% endblock %}

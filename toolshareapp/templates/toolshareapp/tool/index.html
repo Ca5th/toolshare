@@ -1,0 +1,86 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+    
+    {% if show_search %}
+    <form action="{% url 'tool.search.post' %}" method="post">{% csrf_token %}
+        <div class="search-form">
+            <input id="id_search_term" name="search_term" type="text" value="{% if search_term %}{{ search_term }}{% endif %}">
+            <input type="submit" value="Search" />
+            <input  id="id_search_in" name="search_in" type="hidden" value="{% if search_in %} {{ search_in }} {% endif %}" />
+        </div>
+    </form>    
+    {% endif %}
+    
+    {% if tools %}
+        <ul class="tool-list-container">
+            {% for tool in tools %}
+                <li class="tool-item-container">                       
+                    <div class="picture-container float-left">                 
+                        <img src="{{ tool.picture_url.url }}" />
+                    </div>
+                    
+                    <div>
+                        <div class="inline float-left">                    
+                            <p><label class="field-name">{{ tool.name }}</label></p>
+                            <p class="tool-description">{{ tool.description }}</p>
+                        </div>
+                        
+                        <div class="inline float-left owner-info">     
+                            <p>
+                                <label class="field-name">Owner:</label>
+                                <a href="{% url 'user.details' tool.owner.id %}" title="{{ tool.owner }}">
+                                    {{ tool.owner.email }}
+                                </a>
+                            </p>
+                            <p><label class="field-name">Status:</label> {{ tool.status }} </p>
+                            <p><label class="field-name">Shed:</label> {{ tool.shed }} </p>
+                            <div>
+                                <label class="field-name">Categories:</label>
+                                <div style="overflow-x: scroll; width: 230px; height: 35px; display: inline;">
+                                    {% for category in tool.categories.all %}
+                                        {{ category }} 
+                                    {% endfor %}                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="inline float-right">
+                            
+                            {% if tool.owner_id == request.user.id and not tool.shed or tool.shed and tool.shed.coordinator_id == request.user.id %}
+                                <div class="button-section">
+                                    <a class="button" href="{% url 'tool.edit.get' tool.id %}">Edit</a>
+                                </div>
+                                <div class="button-section">
+                                    {% if tool.status == available %}
+                                        <a class="button big" href="{% url 'reservation.change_availability.get' tool.id %}">Change Availability</a>    
+                                        <form action="{% url 'tool.withhold.post' tool.id %}" method="post" class="inline">{% csrf_token %}
+                                            <input type="submit" value="Withhold" />
+                                        </form>
+                                    {% endif %}
+                                    
+                                    {% if tool.status == unavailable %}
+                                        <form action="{% url 'tool.release.post' tool.id %}" method="post" class="inline">{% csrf_token %}
+                                            <input type="submit" value="Release" />
+                                        </form>
+                                    {% endif %}
+                                    
+                                    <form action="{% url 'tool.deregister.post' tool.id %}" method="post" class="inline">{% csrf_token %}
+                                        <input type="submit" value="Deregister" />
+                                    </form>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="button-section">        
+                                <a class="button big" href="{% url 'reservation.create.get' tool.id %}">Request</a>
+                            </div>
+                        </div>                    
+                    </div>                    
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tools to show. Register some <a href="{% url 'tool.create.get' %}">here</a>!</p>
+    {% endif %}
+
+{% endblock %}

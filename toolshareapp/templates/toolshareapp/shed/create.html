@@ -1,0 +1,19 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+  <div class="create-form">
+    
+    <h2>Register Shed</h2>
+    
+    <form id="shed_create_form" action="{% url 'shed.create.post' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <table>{{ form.as_table }}</table>
+      <input type="submit" value="Create" />
+    </form>
+  </div>
+  
+  <script type="text/javascript">
+    $('#shed_create_form').validate(formValidationArguments);
+  </script>
+  
+{% endblock %}

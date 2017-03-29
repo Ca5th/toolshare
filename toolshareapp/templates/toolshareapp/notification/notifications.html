@@ -1,0 +1,35 @@
+<li class="dropdown pull-right">
+
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+        {% if new_notifications %}
+            <div class="new-notification"></div>
+        {% endif %}
+        Notifications
+        <strong class="caret"></strong>
+    </a>
+
+    <ul class="dropdown-menu notifications-menu">
+	{% if notifications %}
+            {% for notification in notifications %}
+                {% if notification.viewed = True %}
+                <li>
+                    <form action="{% url 'notification.mark_as_viewed.post' notification.id %}" method="post" class="inline" >{% csrf_token %}
+                        <a href="#" onclick="this.parentNode.submit();return false;"> {{ notification.text }} </a> 
+                        <!-- <input type="submit" value={{ notification.text }}  class="dropdown-toggle" />-->
+                    </form>
+                </li>
+                {% endif %}
+                {% if notification.viewed = False %}
+                <li style="background-color: greenyellow;" >
+                    <form action="{% url 'notification.mark_as_viewed.post' notification.id %}" method="post" class="inline" >{% csrf_token %}
+                        <a href="#" onclick="this.parentNode.submit();return false;"> {{ notification.text }} </a> 
+                        <!-- <input type="submit" value={{ notification.text }}  class="dropdown-toggle" />-->
+                    </form>
+                </li>    
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </ul>
+</li>
+

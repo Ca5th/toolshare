@@ -1,0 +1,226 @@
+{% extends "toolshareapp/base.html" %}
+{% block javascript %}
+    
+    <script type="text/javascript">
+$(function () {
+        $('#lenders').highcharts({
+            chart: {
+                type: 'column',
+                width: 600,
+                height: 300                
+            },
+            title: {
+                text: 'Most active lenders'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: [''],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Requests',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' millions',
+                enabled: false
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: 10,
+                y: 200,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+            {% for lender in most_active_lenders %}
+                     {
+                name: '{{ lender.tool__owner__name }} {{ lender.tool__owner__lastname }}',
+                data: [{{ lender.count }}]
+            },
+            {% endfor %}
+        ]
+        });
+        
+        $('#borrowers').highcharts({
+            chart: {
+                type: 'column',
+                width: 600,
+                height: 300                
+            },
+            title: {
+                text: 'Most active borrowers'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: [''],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Requests',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                enabled: false
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: 10,
+                y: 200,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+            {% for borrower in most_active_borrowers %}
+                     {
+                name: '{{ borrower.user__name }} {{ borrower.user__lastname }}',
+                data: [{{ borrower.count }}]
+            },
+            {% endfor %}
+        ]
+        });
+        
+        $('#tools').highcharts({
+            chart: {
+                type: 'column',
+                width: 600,
+                height: 300                
+            },
+            title: {
+                text: 'Most requested tools'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: [''],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Requests',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                enabled: false
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: 10,
+                y: 200,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [
+            {% for tool in most_used_tools %}
+                     {
+                name: '{{ tool.tool__name }}',
+                data: [{{ tool.count }}]
+            },
+            {% endfor %}
+        ]
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+
+    {% if most_active_lenders %}
+        <div class="stats-container">
+            <div id="lenders" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    {% else %}
+        <p>No lenders yet</p>
+    {% endif %}
+    
+    
+    {% if most_active_borrowers %}
+        <div class="stats-container">
+            <div id="borrowers" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    {% else %}
+        <p>No borrowers yet</p>
+    {% endif %}
+    
+    {% if most_used_tools %}
+        <div class="stats-container">
+            <div id="tools" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    {% else %}
+        <p>No tools yet</p>
+    {% endif %}
+    
+    
+    
+    
+{% endblock %}

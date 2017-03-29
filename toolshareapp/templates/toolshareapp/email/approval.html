@@ -1,0 +1,8 @@
+<body>
+    <h1 style="font-size: medium; color: #006600;">ToolShare: Community tool sharing network</h1>
+    <p><img src="http://127.0.0.1:8000{{ reservation.tool.picture_url.url }}" width="150px" height="150px" /></p>
+    <p>Hello! <strong>{{ reservation.user }}</strong>.</p>
+    <p>Your reservation has been approved.</p>
+    <p>Pickup arrangement: {{ reservation.pickup }}</p>
+    <p>Check more details <a href="http://127.0.0.1:8000{% url 'reservation.detail.get' reservation.id%}">here!</a></p>
+</body>

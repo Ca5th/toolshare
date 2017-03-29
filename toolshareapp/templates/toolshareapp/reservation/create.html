@@ -1,0 +1,23 @@
+{% extends "toolshareapp/base.html" %} 
+
+
+ 
+{% block content %}
+
+  <div class="create-form">
+    
+    <h2>{{ title }}</h2>
+    <form id="reservation_create_form" action="{% url 'reservation.create.post' %}" method="post">{% csrf_token %}
+
+      <table>{{ form.as_table }}</table>
+      
+      <input type="submit" value="Create" />
+    </form>
+  </div>
+  
+  <script type="text/javascript">
+    $('#reservation_create_form').validate(formValidationArguments);
+  </script>
+
+{% endblock %}
+

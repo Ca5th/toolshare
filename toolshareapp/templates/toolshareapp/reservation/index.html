@@ -1,0 +1,59 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    {% if reservations %}
+        <ul class="reservation-list-container">
+        {% for reservation in reservations %}
+            <li class="reservation-item-container">
+                
+                <div class="inline float-left picture-container">                 
+                    <img src="{{ reservation.tool.picture_url.url }}" />
+                </div>
+                
+                <div class="inline float-left main-info">
+                    <p><label class="field-name">Start date: </label> {{ reservation.start_date }}</p>
+                    <p><label class="field-name">End date: </label> {{ reservation.end_date }}</p>
+                    <p><label class="field-name">Comment: </label></p>
+                    {% if reservation.comment %}
+                        <p title="{{ reservation.comment }}">
+                            {% if reservation.comment|length > 90 %}
+                                {{ reservation.comment|slice:":90" }}...
+                            {% else %}
+                                {{ reservation.comment }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="inline float-left lender-info">
+                    <p>
+                        <label class="field-name">Lender: </label>
+                        <a href="{% url 'user.details' reservation.tool.owner.id %}" title="{{ reservation.tool.owner }}">{{ reservation.tool.owner.email }}</a>
+                    </p>
+                    <p><label class="field-name">Status: </label> {{ reservation.status }}</p>
+                    {% if reservation.pickup_arrangement %}
+                        <p><label class="field-name">Pickup: </label> {{ reservation.pickup_arrangement }}</p>
+                    {% endif %}
+                </div>
+                
+                <div class="inline float-right"> 
+                    {% if reservation.status == pending_approval or reservation.status == awating_for_start_date %}
+                        <form action="{% url 'reservation.cancel_borrow.post' reservation.id %}" method="post" class="inline">{% csrf_token %}
+                            <input type="submit" value="Cancel" />
+                        </form>                
+                    {% endif %}
+                    
+                    {% if reservation.status == ongoing or reservation.status = pending_return%}
+                        <form action="{% url 'reservation.return_tool.post' reservation.id %}" method="post" class="inline">{% csrf_token %}
+                            <input type="submit" value="Return" />
+                        </form>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't made any reservations.</p>
+    {% endif %}
+
+{% endblock %}

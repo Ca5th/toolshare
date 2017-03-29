@@ -1,0 +1,50 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    {% if tools %}
+        <ul class="reservation-list-container">
+        {% for tool in tools %}            
+            <li class="tool-item-container">                       
+                    <div class="picture-container float-left">                 
+                        <img src="{{ tool.picture_url.url }}" />
+                    </div>
+                    
+                    <div>
+                        <div class="inline float-left">                    
+                            <p><label class="field-name">{{ tool.name }}</label></p>
+                            <p class="tool-description">{{ tool.description }}</p>
+                        </div>
+                        
+                        <div class="inline float-left owner-info">     
+                            <p>
+                                <label class="field-name">Owner:</label>
+                                <a href="{% url 'user.details' tool.owner.id %}" title="{{ tool.owner }}">
+                                    {{ tool.owner.email }}
+                                </a>
+                            </p>
+                            <p><label class="field-name">Status:</label> {{ tool.status }} </p>
+                            <p><label class="field-name">Shed:</label> {{ tool.shed }} </p>
+                        </div>
+                        
+                        <div class="inline float-right">
+                            <div class="button-section">
+                                <form action="{% url 'shed.approve_tool.post' tool.id %}" method="post" class="inline">{% csrf_token %}
+                                    <input type="submit" value="Approve" />
+                                </form>
+                            </div>
+                            <div class="button-section">
+                                <form action="{% url 'shed.reject_tool.post' tool.id %}" method="post" class="inline">{% csrf_token %}
+                                    <input type="submit" value="Reject" />
+                                </form>
+                            </div>
+                        </div>                    
+                    </div>                    
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>There aren't any requests.</p>
+    {% endif %}
+
+{% endblock %}

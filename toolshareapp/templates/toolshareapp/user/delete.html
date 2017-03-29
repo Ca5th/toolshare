@@ -1,0 +1,10 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+  <form action="{% url 'user.cancel.post' %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Delete" />
+  </form>
+
+{% endblock %}

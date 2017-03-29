@@ -1,0 +1,28 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    {% if private_messages %}
+        <!--<ul class="tool-list-container">-->
+            
+                
+                    <div id="accordion">
+                        {% for message in private_messages %}
+                      <h3>From: {{ message.from_user.name }} | Subject: {{ message.subject }}</h3>
+                      <div>
+                        <p>
+                            {{ message.text }}
+                        </p>
+                        <a class="button" href="{% url 'message.reply.get' message.id %}">Reply</a>
+                      </div>
+                      {% endfor %}
+                    </div>   
+                <!--</li>-->
+            
+        <!--</ul>-->
+    {% else %}
+        <p>No messages.</p>
+    {% endif %}
+
+{% endblock %}
+

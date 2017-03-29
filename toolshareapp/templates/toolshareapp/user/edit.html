@@ -1,0 +1,30 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+<div class="create-form">
+  
+	<h2>Profile</h2>
+
+    <form id="user_edit_form" action="{% url 'user.edit.post' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="profile-picture">
+            <img src="{{ form.instance.picture.url }}" />
+        </div>
+        <table>
+          <th>
+              <label for="id_email">Email:</label>
+          </th>
+          <td>
+              <span id="id_email">{{ form.instance.email }}</span>
+          </td>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="Save" />
+    </form>    
+</div>
+
+<script type="text/javascript">
+    $('#user_edit_form').validate(formValidationArguments);
+</script>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "toolshareapp/base.html" %}
+{% comment %}
+  Main page to authenticate users.
+{% endcomment %}
+
+
+{% block errormessage %}
+  {% if form.errors %}
+	<div class="messages">
+	  <ul>
+		<li class="error">Your username and password didn't match, please try again.</li>
+	  </ul>
+	</div>
+  {% endif %} 
+{% endblock %}
+
+{% block content %}
+  <section>	
+	<div class="create-form">
+	<h2>Login</h2>
+    <form method="post" action=".">
+      {% csrf_token %}
+	  <table>
+		<tbody>
+		  <tr>
+			<th><label for="id_username">Email:</label></th>
+			<th>{{ form.username }}</th>
+		  </tr>
+		  <tr>
+			<th><label for="id_password">Password:</label></th>
+			<th>{{ form.password }}</th>
+		  </tr>
+		</tbody>
+	  </table>
+      {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+      {% else %}
+        <input type="hidden" name="next" value="/toolshare/tool/" />
+      {% endif %}
+      <input type="submit" value="login" />
+	  <p>Don't have an account? <a href="{% url 'user.create.get' %}">Register</a></p>
+          <p>Forgot your password? <a href="{% url 'password.reset' %}">
+                Reset</a></p>
+
+    </form>
+	<div style="padding-left: 24px;">
+	<iframe width="560" height="315" src="//www.youtube.com/embed/RQIMPKYgIzc" frameborder="0" allowfullscreen></iframe>
+	</div>
+	</div>
+  </section>
+{% endblock %}

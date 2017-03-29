@@ -1,0 +1,4 @@
+ToolShare: Community tool sharing network
+Hello! {{ tool.owner }}.
+There is a new inclusion request for a tool in your shed.
+Check more details here! http://127.0.0.1:8000{% url 'shed.requests' %}

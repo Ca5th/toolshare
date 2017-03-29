@@ -1,0 +1,23 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    {% if notifications %}
+        <ul class="tool-list-container">
+            {% for notification in notifications %}
+                <li class="tool-item-container">                    
+                    <div class="inline">                    
+                        <p><a href={{ notification.link }}>{{ notification.text}}</a></p>
+                        
+                    </div>
+                    
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No notifications for you u_u</p>
+    {% endif %}
+
+{% endblock %}
+    

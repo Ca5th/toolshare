@@ -1,0 +1,21 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    <div class="create-form">
+        
+        <h2>Edit Shed</h2>
+        
+        <form id="shed_edit_form" action="{% url 'shed.edit.post' shed_id %}" method="post">{% csrf_token %}
+            <table>
+            {{ form.as_table }}
+            </table>
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+    
+    <script type="text/javascript">
+        $('#shed_edit_form').validate(formValidationArguments);
+    </script>
+    
+{% endblock %}

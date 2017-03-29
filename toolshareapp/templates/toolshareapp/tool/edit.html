@@ -1,0 +1,28 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+  <div class="create-form">
+    
+    <h2>Edit Tool</h2>
+
+    <form id="tool_edit_form" action="{% url 'tool.edit.post' tool_id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <table>{{ form.as_table }}</table>
+      
+      {% if form.instance.requested_shed %}
+        <div>
+          <span class="accent">Request to put in shed
+          <span class="accent bold">{{ form.instance.requested_shed }}</span>
+          in progress.</span>
+        </div>
+      {% endif %}
+    
+      <input type="submit" value="Save" />
+    </form>
+  </div>
+  
+  <script type="text/javascript">
+    $('#tool_edit_form').validate(formValidationArguments);
+  </script>
+  
+{% endblock %}

@@ -1,0 +1,508 @@
+/*---------------------------------------*/
+/*General*/
+/*---------------------------------------*/
+
+body
+{
+    background-color: #d0ffc5;
+    background-image: url('../img/bg.png');
+    background-repeat: repeat;
+}
+
+a
+{
+    color: #006000;
+}
+
+a:hover, a:focus
+{
+    color: #009000;
+    text-decoration: underline;
+}
+
+input[type="submit"], button, a.button
+{
+    display: inline-block;
+
+    padding: 10px;
+    
+    border: solid 1px White;
+    background-color: #006600;
+    color: White;
+    
+    -moz-box-shadow: 0px 3px 4px 0px #666;
+    -webkit-box-shadow: 0px 3px 4px 0px #666;
+    box-shadow: 0px 3px 4px 0px #666;
+    
+    -webkit-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+input[type="submit"]:hover, button:hover, a.button:hover
+{
+    border: solid 1px #006600;
+    background-color: White;
+    color: #006600;
+
+    text-decoration: none;
+}
+
+label.field-name
+{
+    color: #006600;
+}
+
+span.accent
+{
+    color: #006000;
+}
+
+span.bold
+{
+    font-weight: bold;    
+}
+
+div.align-right
+{
+    text-align: right;
+}
+
+/*---------------------------------------*/
+/*bootstrap override*/
+/*---------------------------------------*/
+
+.nav .caret
+{
+    border-top-color: #006000;
+    border-bottom-color: #009000;
+}
+
+.nav a:hover .caret {
+  border-top-color: #006000;
+  border-bottom-color: #009000;
+}
+
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus
+{
+    background-color: #FFF;
+    border-color: #009900;
+    border-bottom: none;
+    color: #006000;
+}
+
+.nav-tabs
+{
+    border-bottom: none;
+}
+
+.dropdown-menu>li>a
+{
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus
+{
+    color: #fff;
+    text-decoration: none;
+    background-color: #3EAC3A;
+}
+
+.nav>li>a:hover, .nav>li>a:focus
+{
+    text-decoration: none;
+    background-color: #A7F5A7;  
+}
+
+.nav-tabs>li>a:hover
+{
+    border-color: #009900;
+    border-bottom: none;
+    background-color: White;
+    color: #006000;    
+}
+
+.nav-tabs>li>a
+{
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    color: White;
+}
+
+/*---------------------------------------*/
+/*specifics*/
+/*---------------------------------------*/
+
+form.inline
+{
+    display: inline;    
+}
+
+div.inline
+{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+div.float-right
+{
+    float: right;
+}
+
+div.float-left
+{
+    float: left;
+}
+
+div.container-fluid
+{
+    /*
+    margin-left: 10px;
+    margin-right: 10px;
+    */
+}
+
+div.header
+{
+    background-color: White;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    /*-moz-box-shadow: 0px 3px 4px 0px #666;
+    -webkit-box-shadow: 0px 3px 4px 0px #666;
+    box-shadow: 0px 3px 4px 0px #666;*/
+}
+
+div.logo
+{
+    height: 40px;
+    width: 100px !important;
+    background: url('../img/logo-small.png');
+}
+
+div.site-title
+{
+    height: 40px;
+    margin-left: 0px !important;
+}
+
+div.site-title h1
+{
+    margin: 0;
+    color: #005603;
+}
+
+div.site-title span.name
+{
+    font-family: 'Helvetica', sans-serif;
+    color: #006000;
+    font-size: larger;
+}
+
+div.site-title span.subtitle
+{
+    color: #666;
+    font-size: x-large;
+}
+
+ul.nav
+{
+    background-color: #006000;
+    -moz-box-shadow: 0px 3px 4px 0px #666;
+    -webkit-box-shadow: 0px 3px 4px 0px #666;
+    box-shadow: 0px 3px 4px 0px #666;
+}
+
+div#content
+{
+    margin: 10px;
+}
+
+div.messages
+{
+    display: none; /*initial state invisible so jquery can show it with an animation*/
+    background-color: White;
+    cursor: pointer;
+}
+
+div.messages ul, ul.errorlist
+{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.messages ul li
+{
+    padding: 10px;
+}
+
+div.messages ul li.error, ul.errorlist li
+{
+    color: #FF0000;
+}
+
+div.messages ul li.success
+{
+    color: #006600;
+}
+
+div.error-404
+{    
+    height: 530px;
+    background: url('../img/404.jpg');
+    background-size: contain;
+}
+
+/*---------------------------------------*/
+/*Forms*/
+/*---------------------------------------*/
+
+div.search-form
+{
+    text-align: center;
+}
+
+div.search-form input[name="search_term"]
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+    padding: 10px;
+    border: 1px solid #006000;
+}
+
+div.search-form input[name="search_term"]:focus
+{
+    background-color: #A7F5A7;
+}
+
+div.create-form
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+    padding: 10px;
+    border: none;
+    background-color: white;
+    border: 1px solid #006000;
+    
+    -moz-box-shadow: 0px 3px 4px 0px #666;
+    -webkit-box-shadow: 0px 3px 4px 0px #666;
+    box-shadow: 0px 3px 4px 0px #666;
+}
+
+div.create-form h2
+{
+    color: #006600;
+    border-bottom: dotted 1px #006600;
+    font-size: x-large;
+}
+
+input[type="text"], input[type="password"], textarea, select
+{
+    border: solid 1px #006600;
+    padding: 5px;
+    
+    -webkit-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus
+{
+    background-color: #A7F5A7;
+    
+}
+
+ul.dropdown-menu li form.inline
+{
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333;
+    white-space: nowrap;
+}
+
+ul.dropdown-menu li form.inline, ul.dropdown-menu li form.inline a
+{
+    -webkit-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+ul.dropdown-menu li form.inline:hover
+{
+    color: #fff;
+    text-decoration: none;
+    background-color: #3EAC3A;
+    outline: 0;
+}
+
+ul.dropdown-menu li form.inline:hover a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+label.error
+{
+    display: block;
+    color: red;
+    margin-bottom: 0px;
+    font-weight: normal;
+}
+
+/*---------------------------------------*/
+/*tool and reservation list*/
+/*---------------------------------------*/
+
+ul.tool-list-container, ul.reservation-list-container, ul.reservation-history-list-container, li.shed-list-container
+{
+    list-style: none;
+    margin-top: 10px;
+}
+
+li.tool-item-container, li.reservation-item-container, li.reservation-history-item-container, li.shed-item-container
+{
+    display: block;
+    margin: 15px;
+    background-color: White;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border: 1px solid #006000;
+    
+    -moz-box-shadow: 0px 3px 4px 0px #666;
+    -webkit-box-shadow: 0px 3px 4px 0px #666;
+    box-shadow: 0px 3px 4px 0px #666;
+}
+
+li.tool-item-container, li.reservation-item-container
+{
+    min-height: 185px;
+    min-width: 1000px;
+}
+
+li.shed-item-container
+{
+    min-height: 100px;
+}
+
+li.reservation-item-container div.borrower-info,
+li.reservation-item-container div.lender-info,
+li.tool-item-container div.owner-info
+{
+    max-width: 225px;
+}
+
+li.reservation-item-container div.main-info
+{
+    max-width: 200px;
+}
+
+li.tool-item-container div.picture-container,
+li.reservation-item-container div.picture-container
+{
+    margin-right: 10px;
+}
+
+li.tool-item-container div.picture-container img,
+li.reservation-item-container div.picture-container img,
+div.picture-container img
+{
+    max-width: 165px;
+    max-height: 175px;
+}
+
+div.profile-picture
+{    
+    margin-left: auto;
+    margin-right: auto;
+    width: 180px;
+}
+
+div.profile-picture img
+{
+    
+    max-width: 180px;
+    max-height: 250px;
+}
+
+li.tool-item-container p.tool-description
+{
+    width: 215px;
+}
+
+li.tool-item-container div.button-section,
+li.reservation-item-container div.button-section
+{
+    text-align: right;
+    margin: 10px;
+}
+
+/*---------------------------------------*/
+/*Stats*/
+/*---------------------------------------*/
+
+div.stats-container
+{
+    margin: 15px;
+    background-color: White;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border: 1px solid #006000;
+    
+    -moz-box-shadow: 0px 3px 4px 0px #666;
+    -webkit-box-shadow: 0px 3px 4px 0px #666;
+    box-shadow: 0px 3px 4px 0px #666;
+}
+
+div.stats-container h1
+{
+    color: #006000;
+    border-bottom: dotted 1px #006000;
+    font-size: 1.5em;
+}
+
+div.stats-container ul
+{
+    list-style: decimal
+}
+
+/*---------------------------------------*/
+/*Notifications*/
+/*---------------------------------------*/
+
+ul.notifications-menu
+{
+    overflow-y: scroll;
+    height: 200px;
+}
+
+
+div.new-notification
+{
+    background-color: red;
+    position: absolute;
+    top: 6px;
+    left: 91px;
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    z-index: 2;
+    -webkit-animation: blink 1s infinite;
+}
+
+@-webkit-keyframes blink /* Safari and Chrome */
+{
+    0% { box-shadow: 0px 0px 6px 2px #F00; }
+    50% { box-shadow: 0px 0px 6px 2px #FFF; }
+    100% { box-shadow: 0px 0px 6px 2px #F00; }
+}

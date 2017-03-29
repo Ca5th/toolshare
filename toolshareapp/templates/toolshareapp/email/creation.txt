@@ -1,0 +1,4 @@
+ToolShare: Community tool sharing network
+Hello! {{ reservation.tool.owner }}.
+There's a new request for one of your tools.
+Check more details here! http://127.0.0.1:8000{% url 'reservation.detail.get' reservation.id%}

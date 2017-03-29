@@ -1,0 +1,92 @@
+{% extends "toolshareapp/base.html" %}
+
+{% block content %}
+
+    {% if reservations %}
+        <ul class="reservation-list-container">
+        {% for reservation in reservations %}
+            <li class="reservation-item-container">
+                
+                <div class="picture-container float-left">                 
+                    <img src="{{ reservation.tool.picture_url.url }}" />
+                </div>
+                
+                <div class="inline float-left main-info">
+                    <p><label class="field-name">Start date: </label> {{ reservation.start_date }}</p>
+                    <p><label class="field-name">End date: </label> {{ reservation.end_date }}</p>
+                    <p><label class="field-name">Comment: </label></p>
+                    {% if reservation.comment %}
+                        <p title="{{ reservation.comment }}">
+                            {% if reservation.comment|length > 90 %}
+                                {{ reservation.comment|slice:":90" }}...
+                            {% else %}
+                                {{ reservation.comment }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="inline float-left borrower-info">
+                    <p>
+                        <label class="field-name">Borrower: </label>
+                        <a href="{% url 'user.details' reservation.user.id %}" title="{{ reservation.user }}">{{ reservation.user.email }}</a>
+                    </p>
+                    <p><label class="field-name">Status: </label> {{ reservation.status }}</p>
+                    {% if reservation.pickup_arrangement %}
+                        <p><label class="field-name">Pickup: </label> {{ reservation.pickup_arrangement }}</p>
+                    {% endif %}                    
+                </div>
+                
+                <div class="inline float-right">                
+                    {% if reservation.status == awating_for_start_date or reservation.status == ongoing %}
+                        <div class="button-section">
+                            <form action="{% url 'reservation.cancel_lend.post' reservation.id %}" method="post" class="inline">{% csrf_token %}
+                                <input type="submit" value="Cancel" />
+                            </form>
+                        </div>
+                    {% endif %}
+                    
+                    {% if reservation.status == pending_approval %}
+                        <div class="button-section">
+                            <form id="reservation_approve_form_{{ reservation.id }}" action="{% url 'reservation.approve.post' reservation.id %}" method="post" class="inline">{% csrf_token %}
+                                <label for="id_pickup">Pickup:</label>
+                                {{ approval_form.pickup }}
+                                <input type="submit" value="Approve" />
+                                {{ approval_form.pickup.errors }}
+                            </form>
+                            
+                            <script type="text/javascript">
+                              $('#reservation_approve_form_{{ reservation.id }}').validate(inlineFormValidationArguments);
+                            </script>
+                            
+                        </div>
+                        <div class="button-section">
+                            <form id="reservation_rejection_form_{{ reservation.id }}" action="{% url 'reservation.reject.post' reservation.id %}" method="post" class="inline">{% csrf_token %}
+                                <label for="id_reason">Reason:</label>
+                                {{ rejection_form.reason }}
+                                <input type="submit" value="Reject" />
+                                {{ rejection_form.reason.errors }}
+                            </form>
+                            
+                            <script type="text/javascript">
+                              $('#reservation_rejection_form_{{ reservation.id }}').validate(inlineFormValidationArguments);
+                            </script>
+                            
+                        </div>
+                    {% endif %}
+                    
+                    {% if reservation.status == pending_return_acknowledge %}
+                        <div class="button-section">
+                            <form action="{% url 'reservation.acknowledge_return.post' reservation.id %}" method="post" class="inline">{% csrf_token %}
+                                <input type="submit" value="Acknowledge Return" />
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nobody has reserved your tools!</p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% if user_has_shed %}
+    <li>
+        <a href="{% url 'tool.shed' %}">My Shed</a>
+    </li>
+    <li>
+        <a href="{% url 'shed.deregister.mine.post' %}">Delete my Shed</a>
+    </li>
+    <li>
+        <a href="{% url 'shed.requests' %}">Inclusion Requests</a>
+    </li>
+{% else %}
+    <li>
+        <a href="{% url 'shed.create.get' %}">Create</a>
+    </li>
+{% endif %}

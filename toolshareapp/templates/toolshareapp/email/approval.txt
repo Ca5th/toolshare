@@ -1,0 +1,4 @@
+ToolShare: Community tool sharing network
+Hello! {{ reservation.user }}.
+Your reservation has been approved.
+Check more details here! http://127.0.0.1:8000{% url 'reservation.detail.get' reservation.id%}
